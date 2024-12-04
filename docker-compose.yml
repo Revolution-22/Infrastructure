@@ -1,0 +1,14 @@
+version: '3'
+services:
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ../DiscoveryService
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
