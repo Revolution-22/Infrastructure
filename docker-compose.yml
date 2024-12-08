@@ -1,12 +1,24 @@
 version: '3'
 services:
-  eureka-server:
-    container_name: eureka-server
+  discovery-service:
+    container_name: discovery-service
     build:
       context: ../DiscoveryService
       dockerfile: Dockerfile
     ports:
       - 8761:8761
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - config-service
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
+  config-service:
+    container_name: config-service
+    build:
+      context: ../ConfigService
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
     networks:
       - spring-cloud-network
 networks:
