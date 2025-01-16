@@ -5,8 +5,6 @@ services:
     build:
       context: ../DiscoveryService
       dockerfile: Dockerfile
-    ports:
-      - 8761:8761
     networks:
       - spring-cloud-network
     depends_on:
@@ -18,10 +16,9 @@ services:
     build:
       context: ../ConfigService
       dockerfile: Dockerfile
-    ports:
-      - 8888:8888
     networks:
       - spring-cloud-network
+      
   auth-service:
     container_name: auth-service
     build:
@@ -46,6 +43,19 @@ services:
       - spring-cloud-network
     volumes:
       - auth-service-postgres-data:/var/lib/postgresql/data
+      
+  gateway:
+    container_name: gateway
+    build:
+      context: ../Gateway
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - config-service
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
 networks:
   spring-cloud-network:
     driver: bridge
