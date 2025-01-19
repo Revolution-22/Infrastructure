@@ -32,7 +32,7 @@ services:
 
   auth-service-postgres:
     container_name: auth-service-postgres
-    image: postgres:15
+    image: postgres:17.2
     ports:
       - 5432:5432
     environment:
