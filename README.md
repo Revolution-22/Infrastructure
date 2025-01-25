@@ -19,6 +19,7 @@ Serwis "Revolution" jest skierowany do użytkowników indywidualnych oraz małyc
 
 ### 4.3 ConfigService
 - Centralny serwer konfiguracji zarządzający ustawieniami dla poszczególnych mikroserwisów.
+- UPDATE 25.01.2025 Zamieniono na vault
 
 ### 4.4 AuthService
 - Logowanie i rejestracja użytkowników.
