@@ -55,6 +55,34 @@ services:
       - spring-cloud-network
     volumes:
       - auth-service-postgres-data:/var/lib/postgresql/data
+      
+  details-service:
+    container_name: details-service
+    build:
+      context: ../DetailsService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - vault
+    environment:
+      - VAULT_ADDR=http://vault:8200
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
+
+  details-service-postgres:
+    container_name: details-service-postgres
+    image: postgres:17.2
+    ports:
+      - 5433:5433
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: details-service
+      PGPORT: 5433
+    networks:
+      - spring-cloud-network
+    volumes:
+      - details-service-postgres-data:/var/lib/postgresql/data
 
   gateway:
     container_name: gateway
@@ -93,4 +121,5 @@ networks:
     driver: bridge
 
 volumes:
-  auth-service-postgres-data:
+  auth-service-postgres-data: {}
+  details-service-postgres-data: {}
