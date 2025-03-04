@@ -61,10 +61,15 @@ add_config_to_vault() {
     eureka.client.serviceUrl.defaultZone="http://\${eureka.instance.hostname}:\${server.port}/eureka/"
 
   # Add gateway configuration
-  vault kv put secret/gateway \
-    eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
-    logging.level.org.springframework.cloud.gateway=DEBUG \
-    logging.level.org.springframework.cloud.client.discovery=DEBUG
+ vault kv put secret/gateway \
+     eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
+     logging.level.org.springframework.cloud.gateway=DEBUG \
+     logging.level.org.springframework.cloud.client.discovery=DEBUG \
+     spring.cloud.gateway.globalcors.cors-configurations.\[\/\*\*\].allowedOrigins="http://localhost:4200" \
+     spring.cloud.gateway.globalcors.cors-configurations.\[\/\*\*\].allowedMethods="GET, POST, PUT, DELETE, OPTIONS, PATCH" \
+     spring.cloud.gateway.globalcors.cors-configurations.\[\/\*\*\].allowedHeaders="*" \
+     spring.cloud.gateway.globalcors.cors-configurations.\[\/\*\*\].allowCredentials=true
+
 }
 
 # Ensure Vault binary is installed
