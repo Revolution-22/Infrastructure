@@ -100,7 +100,7 @@ services:
     entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
 
   broker:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:4.0.0
     container_name: broker
     ports:
       - 9092:9092
