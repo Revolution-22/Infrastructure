@@ -32,7 +32,6 @@ add_config_to_vault() {
     spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
     spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
     spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
-    spring.kafka.consumer.group-id="details-service-group" \
     spring.flyway.enabled=true \
     spring.flyway.locations=classpath:db/migration \
     spring.datasource.url="jdbc:postgresql://details-service-postgres:5433/details-service" \
