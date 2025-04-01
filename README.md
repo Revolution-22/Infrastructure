@@ -52,6 +52,7 @@
 - Obsługa płatności za zamówienia:
     - Realizacja płatności na podstawie ID zamówienia.
 - Integracja z dostawcami usług płatniczych.
+- UPDATE 01.04.2025 Intergracja z bankiem ING, automatyczne wyplaty
 
 ### 1.11 NotificationsService
 - Generowanie powiadomień:
