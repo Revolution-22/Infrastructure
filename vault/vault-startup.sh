@@ -25,6 +25,23 @@ add_config_to_vault() {
   # Login to Vault using root token
   vault login "$VAULT_DEV_ROOT_TOKEN_ID" || { echo "Vault login failed"; exit 1; }
 
+  # Add payment-service configuration
+  vault kv put secret/payment-service \
+    server.port=0 \
+    eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
+    spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
+    spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
+    spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
+    spring.flyway.enabled=true \
+    spring.flyway.locations=classpath:db/migration \
+    spring.datasource.url="jdbc:postgresql://payment-service-postgres:5435/payment-service" \
+    spring.datasource.username="postgres" \
+    spring.datasource.password="12345" \
+    spring.datasource.driver-class-name=org.postgresql.Driver \
+    spring.jpa.hibernate.ddl-auto=validate \
+    spring.jpa.show-sql=true \
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
   # Add details-service configuration
   vault kv put secret/details-service \
     server.port=0 \
