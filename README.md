@@ -47,12 +47,14 @@
     - Obsługa eventów potwierdzających płatność w celu zatwierdzenia zamówienia.
     - Zwracanie statusu zamówienia.
 - Integracja z dostawcami usług wysyłkowych.
+- UPDATE 01.04.2025 Wysylanie eventu na kafke po odebraniu zamowienia przez klienta
 
 ### 1.10 PaymentService
 - Obsługa płatności za zamówienia:
     - Realizacja płatności na podstawie ID zamówienia.
 - Integracja z dostawcami usług płatniczych.
 - UPDATE 01.04.2025 Intergracja z bankiem ING, automatyczne wyplaty
+- UPDATE 01.04.2025 Odebranie eventu o zrealizowaniu zamowienia (Odbior paczki) i wyplacenie gotowki
 
 ### 1.11 NotificationsService
 - Generowanie powiadomień:
