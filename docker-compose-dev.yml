@@ -60,6 +60,21 @@ services:
     volumes:
       - details-service-postgres-data:/var/lib/postgresql/data
 
+  payment-service-postgres:
+    container_name: payment-service-postgres
+    image: postgres:17.2
+    ports:
+      - 5435:5435
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: payment-service
+      PGPORT: 5435
+    networks:
+      - spring-cloud-network
+    volumes:
+      - payment-service-postgres-data:/var/lib/postgresql/data
+
   gateway:
     container_name: gateway
     build:
@@ -108,3 +123,4 @@ networks:
 volumes:
   auth-service-postgres-data: {}
   details-service-postgres-data: {}
+  payment-service-postgres-data: {}
