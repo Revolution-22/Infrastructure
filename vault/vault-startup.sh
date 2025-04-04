@@ -40,7 +40,11 @@ add_config_to_vault() {
     spring.datasource.driver-class-name=org.postgresql.Driver \
     spring.jpa.hibernate.ddl-auto=validate \
     spring.jpa.show-sql=true \
-    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect \
+    stripe.api-key=sk_test_51R9BAgFWlcfq3gcmcQ7alHTDQOY7JiWH4mDtOpRQ5iYQjh1Bo1NluJRekK53MsydnheY3YmlHH4Kg2w8ymjjQ2BC00pTWLA2yD \
+    stripe.redirect-url=http://localhost:4200/dashboard \
+    stripe.secret=whsec_uKlZHhJvJ9SaNbuVmGOvjwR231Uk4bjT
+
 
   # Add details-service configuration
   vault kv put secret/details-service \
