@@ -27,23 +27,32 @@ add_config_to_vault() {
 
   # Add payment-service configuration
   vault kv put secret/payment-service \
-    server.port=0 \
-    eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
-    spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
-    spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
-    spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
-    spring.flyway.enabled=true \
-    spring.flyway.locations=classpath:db/migration \
-    spring.datasource.url="jdbc:postgresql://payment-service-postgres:5435/payment-service" \
-    spring.datasource.username="postgres" \
-    spring.datasource.password="12345" \
-    spring.datasource.driver-class-name=org.postgresql.Driver \
-    spring.jpa.hibernate.ddl-auto=validate \
-    spring.jpa.show-sql=true \
-    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect \
-    stripe.api-key=sk_test_51R9BAgFWlcfq3gcmcQ7alHTDQOY7JiWH4mDtOpRQ5iYQjh1Bo1NluJRekK53MsydnheY3YmlHH4Kg2w8ymjjQ2BC00pTWLA2yD \
-    stripe.redirect-url=http://localhost:4200/dashboard \
-    stripe.secret=whsec_uKlZHhJvJ9SaNbuVmGOvjwR231Uk4bjT
+      server.port=0 \
+      eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
+      spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
+      spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
+      spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
+      spring.flyway.enabled=true \
+      spring.flyway.locations=classpath:db/migration \
+      spring.datasource.url="jdbc:postgresql://payment-service-postgres:5435/payment-service" \
+      spring.datasource.username="postgres" \
+      spring.datasource.password="12345" \
+      spring.datasource.driver-class-name=org.postgresql.Driver \
+      spring.jpa.hibernate.ddl-auto=validate \
+      spring.jpa.show-sql=true \
+      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect \
+      stripe.api-key=sk_test_51R9BAgFWlcfq3gcmcQ7alHTDQOY7JiWH4mDtOpRQ5iYQjh1Bo1NluJRekK53MsydnheY3YmlHH4Kg2w8ymjjQ2BC00pTWLA2yD \
+      stripe.redirect-url=http://localhost:4200/dashboard \
+      stripe.secret=whsec_uKlZHhJvJ9SaNbuVmGOvjwR231Uk4bjT \
+      email.admin=kwolny31@gmail.com \
+      email.host=smtp.gmail.com \
+      email.port=587 \
+      email.username=karolwolny780 \
+      email.password="pwem cvkt vkxi xfms" \
+      email.transport-protocol=smtp \
+      email.smtp-auth=true \
+      email.smtp-starttls=true \
+      email.from=Revolution-22
 
 
   # Add details-service configuration
@@ -114,6 +123,7 @@ add_config_to_vault
 echo "Vault is running with PID $VAULT_PID"
 echo "Configuration added to Vault under:"
 echo "- secret/details-service"
+echo "- secret/payment-service"
 echo "- secret/auth-service"
 echo "- secret/discovery-service"
 echo "- secret/gateway"

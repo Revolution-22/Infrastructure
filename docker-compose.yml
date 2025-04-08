@@ -40,7 +40,7 @@ services:
       - vault
     environment:
       - VAULT_ADDR=http://vault:8200
-    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar --spring.profiles.active=production" ]
 
   auth-service-postgres:
     container_name: auth-service-postgres
@@ -67,7 +67,7 @@ services:
       - vault
     environment:
       - VAULT_ADDR=http://vault:8200
-    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar --spring.profiles.active=production" ]
 
   details-service-postgres:
     container_name: details-service-postgres
@@ -95,7 +95,7 @@ services:
       - vault
     environment:
       - VAULT_ADDR=http://vault:8200
-    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar" ]
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar --spring.profiles.active=production" ]
 
   payment-service-postgres:
     container_name: payment-service-postgres
