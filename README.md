@@ -60,3 +60,7 @@
 - Generowanie powiadomień:
     - Powiadomienia e-mail (web): odbieranie eventów z OrderService, PaymentService, AuthService, RankService.
     - Powiadomienia push (mobile): obsługa eventów z tych samych źródeł.
+  
+### 1.12 AdminService
+- Zadania administracyjne na uzytykownikach:
+- Zatwierdzanie wyplat
