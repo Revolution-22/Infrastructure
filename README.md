@@ -53,8 +53,9 @@
 - Obsługa płatności za zamówienia:
     - Realizacja płatności na podstawie ID zamówienia.
 - Integracja z dostawcami usług płatniczych.
-- UPDATE 01.04.2025 Intergracja z bankiem ING, automatyczne wyplaty
 - UPDATE 01.04.2025 Odebranie eventu o zrealizowaniu zamowienia (Odbior paczki) i wyplacenie gotowki
+- UPDATE 01.10.2025 Emitownie eventu do admin service o zleceniu wyplaty
+
 
 ### 1.11 NotificationsService
 - Generowanie powiadomień:
@@ -64,3 +65,4 @@
 ### 1.12 AdminService
 - Zadania administracyjne na uzytykownikach:
 - Zatwierdzanie wyplat
+       - Odbiera event z payment service i robi zlecenie wyplaty oraz emituje event z powiadomieniem
