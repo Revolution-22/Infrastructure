@@ -112,6 +112,34 @@ services:
     volumes:
       - payment-service-postgres-data:/var/lib/postgresql/data
 
+  admin-service:
+    container_name: admin-service
+    build:
+      context: ../AdminService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - vault
+    environment:
+      - VAULT_ADDR=http://vault:8200
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar --spring.profiles.active=production" ]
+
+  admin-service-postgres:
+    container_name: admin-service-postgres
+    image: postgres:17.2
+    ports:
+      - 5436:5436
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: admin-service
+      PGPORT: 5436
+    networks:
+      - spring-cloud-network
+    volumes:
+      - admin-service-postgres-data:/var/lib/postgresql/data
+
   gateway:
     container_name: gateway
     build:
@@ -161,3 +189,4 @@ volumes:
   auth-service-postgres-data: {}
   details-service-postgres-data: {}
   payment-service-postgres-data: {}
+  admin-service-postgres-data: {}
