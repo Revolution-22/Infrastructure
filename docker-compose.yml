@@ -110,7 +110,20 @@ services:
     networks:
       - spring-cloud-network
     volumes:
-      - payment-service-postgres-data:/var/lib/postgresql/data
+      - payment-service-postgres-data:/var/lib/postgresql/data\
+
+  notification-service:
+    container_name: notification-service
+    build:
+      context: ../NotificationService
+      dockerfile: Dockerfile
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - vault
+    environment:
+      - VAULT_ADDR=http://vault:8200
+    entrypoint: [ "sh", "-c", "sleep 5; java -jar app.jar --spring.profiles.active=production" ]
 
   admin-service:
     container_name: admin-service
