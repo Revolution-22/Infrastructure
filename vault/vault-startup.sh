@@ -24,16 +24,27 @@ add_config_to_vault() {
 
   # Login to Vault using root token
   vault login "$VAULT_DEV_ROOT_TOKEN_ID" || { echo "Vault login failed"; exit 1; }
+
+   # Add admin-service configuration
+    vault kv put secret/notification-service \
+        server.port=0 \
+        eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
+        spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
+        spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
+        spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
   # Add admin-service configuration
-  vault kv put secret/payment-service \
+  vault kv put secret/admin-service \
       server.port=0 \
       eureka.client.serviceUrl.defaultZone="http://discovery-service:8761/eureka/" \
       spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
       spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
       spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
+      spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
+      spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
       spring.flyway.enabled=true \
       spring.flyway.locations=classpath:db/migration \
-      spring.datasource.url="jdbc:postgresql://admin-service-postgres:5436/payment-service" \
+      spring.datasource.url="jdbc:postgresql://admin-service-postgres:5436/admin-service" \
       spring.datasource.username="postgres" \
       spring.datasource.password="12345" \
       spring.datasource.driver-class-name=org.postgresql.Driver \
@@ -48,6 +59,8 @@ add_config_to_vault() {
       spring.kafka.bootstrap-servers="PLAINTEXT://broker:9092" \
       spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
       spring.kafka.consumer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
+      spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer \
+      spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer \
       spring.flyway.enabled=true \
       spring.flyway.locations=classpath:db/migration \
       spring.datasource.url="jdbc:postgresql://payment-service-postgres:5435/payment-service" \
